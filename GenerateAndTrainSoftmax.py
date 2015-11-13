@@ -36,7 +36,7 @@ for i in xrange(200):
   # evaluate class scores, [N x K]
   scores = np.dot(X, W) + b 
 
-  # compute the class probabilities
+  # compute the class probabilities (cross entropy)
   exp_scores = np.exp(scores)
   probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True) # [N x K]
 
@@ -46,7 +46,7 @@ for i in xrange(200):
   reg_loss = 0.5*reg*np.sum(W*W)
   loss = data_loss + reg_loss
   if i % 10 == 0:
-    print "iteration %d: loss %f" % (i, loss)
+    print("iteration %d: loss %f" % (i, loss))
 
   # compute the gradient on scores
   dscores = probs
@@ -68,5 +68,5 @@ for i in xrange(200):
 # evaluate training set accuracy
 scores = np.dot(X, W) + b
 predicted_class = np.argmax(scores, axis=1)
-print 'training accuracy: %.2f' % (np.mean(predicted_class == y))
+print('training accuracy: %.2f' % (np.mean(predicted_class == y)))
 
